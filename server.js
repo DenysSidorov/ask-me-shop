@@ -8,11 +8,12 @@ import config from './config';
 // x-response-time
 
 app.use(async (ctx, next) => {
+  ctx.cookies.set('a', Date.now());
   const start = Date.now();
   await next();
   const ms = Date.now() - start;
   ctx.set('X-Response-Time', `${ms}ms`);
-  ctx.body = ctx.body + ' ' + ms;
+  ctx.body = ctx.body + ' ------- ' + ms;
 });
 
 // logger
