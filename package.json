@@ -1,0 +1,15 @@
+{
+  "name": "ask-me-shop",
+  "version": "1.0.0",
+  "description": "online chat for shop basedon js stack",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Denis Sidorov",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.5.0"
+  }
+}
