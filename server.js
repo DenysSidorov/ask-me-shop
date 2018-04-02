@@ -1,5 +1,6 @@
 import Koa from 'koa';
-
+const http = require('http');
+const https = require('https');
 const app = new Koa();
 import config from './config';
 
@@ -11,6 +12,7 @@ app.use(async (ctx, next) => {
   await next();
   const ms = Date.now() - start;
   ctx.set('X-Response-Time', `${ms}ms`);
+  ctx.body = ctx.body + ' ' + ms;
 });
 
 // logger
@@ -28,6 +30,11 @@ app.use(async ctx => {
   ctx.body = 'Hello World';
 });
 
-app.listen(config.server.port, () => {
-  console.log(`Listening on port ${config.server.port}`);
+
+http.createServer(app.callback()).listen(config.server.httpPort, () => {
+  console.log(`Listening on port ${config.server.httpPort}`);
 });
+
+// https.createServer(app.callback()).listen(config.server.httpsPort, () => {
+//   console.log(`Listening on port ${config.server.httpsPort}`);
+// });

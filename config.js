@@ -1,5 +1,6 @@
 export default {
   server: {
-    port: 3003
+    httpPort: 3003,
+    httpsPort: 3004
   }
 }

@@ -1,2 +1,4 @@
 - add smart logging
 - add smart config-npm
+- add nodemon
+- add https
