@@ -3,7 +3,7 @@ async function responseTime(ctx, next) {
   await next();
   const ms = Date.now() - start;
   ctx.set('X-Response-Time', `${ms}ms`);
-  ctx.body = ms;
+  // ctx.body = ms;
 }
 
 export default responseTime;
