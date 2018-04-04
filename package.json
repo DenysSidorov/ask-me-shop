@@ -6,7 +6,8 @@
   "author": "Denis Sidorov",
   "license": "ISC",
   "dependencies": {
-    "koa": "^2.5.0"
+    "koa": "^2.5.0",
+    "koa-compose": "^4.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
