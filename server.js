@@ -22,6 +22,7 @@ app.use(async function (ctx) {
   // await ctx.render('index');
 });
 
+// var httpServer = app.server.listen( process.env.PORT || config.server.httpPort )
 
 var httpServer = http.createServer(app.callback()).listen(config.server.httpPort, () => {
   console.log(`Listening on port ${config.server.httpPort}`);
