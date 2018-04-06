@@ -1,4 +1,3 @@
 const serve = require('koa-static');
-
-let p = (__dirname + '../public')
-export default serve(p);
+const path = require('path');
+export default serve(path.join(__dirname, '../public'));

@@ -1,4 +1,5 @@
 import Koa from 'koa';
+
 const http = require('http');
 const https = require('https');
 const app = new Koa();
@@ -12,23 +13,13 @@ import middlewares from './server/middlewares';
 import socket from './server/socket';
 
 middlewares(app);
-app.use(serve(path.join(__dirname, '/server/public')));
-
-// app.get('/', function(ctx, next){
-//   res.sendFile(__dirname + '/index.html');
-// });
 
 
-// templates .EJS
-app.use(views(path.join(__dirname, '/server/views'), { extension: 'ejs' }));
-
-
-app.use(async function(ctx) {
-  if(ctx.path === '/chat'){
-   await ctx.render('index');
-  } else {
-    ctx.redirect('/');
+app.use(async function (ctx) {
+  if (ctx.path !== '/') {
+     ctx.redirect('/');
   }
+  // await ctx.render('index');
 });
 
 
