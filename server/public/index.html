@@ -24,12 +24,31 @@
   var socket = io();
 //  console.log(socket, 's');
 //  socket.emit('chat message', '');
+  var ul = document.getElementById('messages');
+  socket.on('connect', function (par) {
+//    $('#incomingChatMessages').append($('<li>Connected</li>'));
+
+
+    socket.on('message', function(message) {
+      var li = document.createElement('li');
+      li.textContent = message;
+      ul.append(li);
+    });
+    socket.on('disconnect', function() {
+      var li = document.createElement('li');
+      li.textContent = 'Disconnected';
+      li.style.color = 'red';
+      ul.append(li)
+    });
+  });
+
 
   var sendBtn = document.forms.from.send;
   sendBtn.addEventListener('click', function (ev) {
     ev.preventDefault();
     var sendValue = document.forms.from.m.value;
     console.log(sendValue, ' v');
+    socket.emit('message', sendValue);
     document.forms.from.m.value = '';
   })
 </script>

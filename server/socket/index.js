@@ -6,8 +6,9 @@ export default (server) => {
 
   io.on('connection', function (client) {
     console.log(client.id + ' user connected');
-    client.on('chat message', function (msg) {
+    client.on('message', function (msg) {
       console.log('message: ' + msg);
+      io.emit('message', msg);
     });
     client.on('disconnect', function(){
       console.log(client.id + ' user disconnect');
