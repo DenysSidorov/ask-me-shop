@@ -15,14 +15,23 @@
 </head>
 <body>
 <ul id="messages"></ul>
-<form action="">
-    <input id="m" autocomplete="off" /><button>Send</button>
+<form action="" name="from">
+    <input id="m" autocomplete="off" /><button id="send">Send</button>
 </form>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
 <script>
   var socket = io();
   socket.emit('chat message', 'booooo');
+
+
+  var sendBtn = document.forms.from.send;
+  sendBtn.addEventListener('click', function (ev) {
+    ev.preventDefault();
+    var sendValue = document.forms.from.m.value;
+    console.log(sendValue, ' v');
+    document.forms.from.m.value = '';
+  })
 </script>
 
 
