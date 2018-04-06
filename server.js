@@ -3,6 +3,7 @@ const http = require('http');
 const https = require('https');
 const app = new Koa();
 const views = require('koa-views');
+const serve = require('koa-static');
 const path = require('path');
 let socketIO = require('socket.io');
 
@@ -11,11 +12,7 @@ import middlewares from './server/middlewares';
 import socket from './server/socket';
 
 middlewares(app);
-
-
-
-
-
+app.use(serve(path.join(__dirname, '/server/public')));
 
 // app.get('/', function(ctx, next){
 //   res.sendFile(__dirname + '/index.html');
@@ -27,8 +24,11 @@ app.use(views(path.join(__dirname, '/server/views'), { extension: 'ejs' }));
 
 
 app.use(async function(ctx) {
-   // await ctx.render('test', { user });
+  if(ctx.path === '/chat'){
    await ctx.render('index');
+  } else {
+    ctx.redirect('/');
+  }
 });
 
 
