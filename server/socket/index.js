@@ -1,6 +1,6 @@
 let socketIO = require('socket.io');
 
-export default (server) => {
+function socket(server){
 
   let io = socketIO(server);
 
@@ -19,7 +19,7 @@ export default (server) => {
   });
 }
 
-
+export default socket;
 /**
  Homework
  Read DOCUMENTATIONS !!!
