@@ -1,9 +1,15 @@
 let socketIO = require('socket.io');
+// let socketEmitter = require('socket.io-emitter');
 
 function socket(server){
 
   let io = socketIO(server);
+  io.use(function(socket, next) {
+    var handshakeData = socket.request;
+    console.log(handshakeData.headers, '++++++++++');
 
+    next();
+  });
   io.on('connection', function (client) {
     console.log(client.id + ' user connected');
     client.emit('message', 'Hello User');
