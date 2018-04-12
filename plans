@@ -4,7 +4,12 @@
 - add https
 - ***** add all middleware
 
-
+- passport
+- mongoose
+- session
+- auth with token/local strategy
+- put session in socket
+- write app
 
 ** DOCUMENTATIONS**
 - Socket.io
