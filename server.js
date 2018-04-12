@@ -1,8 +1,7 @@
 import Koa from 'koa';
-
 const http = require('http');
-const https = require('https');
 const app = new Koa();
+const https = require('https');
 const views = require('koa-views');
 const serve = require('koa-static');
 const path = require('path');
@@ -22,10 +21,11 @@ app.use(async function (ctx) {
   // await ctx.render('index');
 });
 
-// var httpServer = app.server.listen( process.env.PORT || config.server.httpPort )
+const port = process.env.PORT || config.server.httpPort;
+// var httpServer = app.server.listen(port )
 
-var httpServer = http.createServer(app.callback()).listen(config.server.httpPort, () => {
-  console.log(`Listening on port ${config.server.httpPort}`);
+var httpServer = http.createServer(app.callback()).listen(port, () => {
+  console.log(`Listening on port ${port}`);
 });
 
 // https.createServer(app.callback()).listen(config.server.httpsPort, () => {
