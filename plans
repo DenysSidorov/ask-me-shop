@@ -1,17 +1,18 @@
 - add smart logging
 - add smart config-npm
-- ***** add nodemon
 - add https
+- add pm2
+- ***** add nodemon
 - ***** add all middleware
 
-- mongoose
-- session
-- passport
-- auth with token/local strategy
-- put session in socket
+- add mongoose
+- add session
+- add passport
+- add auth with token/local strategy
+- add put session in socket
 - write app
 
 ** DOCUMENTATIONS**
-- Socket.io
+- ***** Socket.io
 - Mongoose in depth
 
