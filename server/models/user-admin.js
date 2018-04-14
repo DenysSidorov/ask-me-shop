@@ -1,41 +1,38 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
-const _ = require('lodash');
-const config = require('config');
+// const _ = require('lodash');
+// const config = require('config');
 
 const userSchema = new mongoose.Schema({
-  displayName:   {
-    type:     String,
+  displayName: {
+    type: String,
     required: "Имя пользователя отсутствует."
   },
-  email:         {
-    type:     String,
-    unique:   true,
+  email: {
+    type: String,
+    unique: true,
     required: "E-mail пользователя не должен быть пустым.",
     validate: [
       {
         validator: function checkEmail(value) {
-          return this.deleted ? true : /^[-.\w]+@([\w-]+\.)+[\w-]{2,12}$/.test(value);
+          return /^[-.\w]+@([\w-]+\.)+[\w-]{2,12}$/.test(value);
         },
-        msg:       'Укажите, пожалуйста, корректный email.'
+        msg: 'Укажите, пожалуйста, корректный email.'
       }
     ]
   },
-  deleted: Boolean,
-  passwordHash:  {
+  passwordHash: {
     type: String,
     required: true
   },
-  salt:          {
+  salt: {
     required: true,
     type: String
   }
-}, {
-  timestamps: true
-});
+}, {timestamps: true});
 
 userSchema.virtual('password')
-  .set(function(password) {
+  .set(function (password) {
 
     if (password !== undefined) {
       if (password.length < 4) {
@@ -54,15 +51,21 @@ userSchema.virtual('password')
       this.passwordHash = undefined;
     }
   })
-  .get(function() {
+  .get(function () {
     return this._plainPassword;
   });
 
-userSchema.methods.checkPassword = function(password) {
+userSchema.methods.checkPassword = function (password) {
   if (!password) return false; // empty password means no login by password
   if (!this.passwordHash) return false; // this user does not have password (the line below would hang!)
 
-  return crypto.pbkdf2Sync(password, this.salt, config.crypto.hash.iterations, config.crypto.hash.length, 'sha1') == this.passwordHash;
+  return crypto.pbkdf2Sync(
+    password,
+    this.salt,
+    config.crypto.hash.iterations,
+    config.crypto.hash.length,
+    'sha1')
+    == this.passwordHash;
 };
 
 module.exports = mongoose.model('User', userSchema);

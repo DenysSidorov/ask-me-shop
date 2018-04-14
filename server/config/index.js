@@ -1,9 +1,15 @@
-const defer = require('config/defer').deferConfig;
-// const path = require('path');
+const config  = {
+  crypto: {
+    hash: {
+      length:     128,
+      iterations: process.env.NODE_ENV == 'production' ? 1200 : 1
+    }
+  },
+}
 
-module.exports = {
-  // secret data can be moved to env variables
-  // or a separate config
+export default config;
+
+var def = {
   secret:   'mysecret',
   mongoose: {
     uri:     'mongodb://localhost/app',
