@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-const crypto = require('crypto');
-// const _ = require('lodash');
-// const config = require('config');
+import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema({
   displayName: {
@@ -31,41 +29,32 @@ const userSchema = new mongoose.Schema({
   }
 }, {timestamps: true});
 
-userSchema.virtual('password')
-  .set(function (password) {
-
-    if (password !== undefined) {
-      if (password.length < 4) {
-        this.invalidate('password', 'Пароль должен быть минимум 4 символа.');
-      }
-    }
-
-    this._plainPassword = password;
-
-    if (password) {
-      this.salt = crypto.randomBytes(config.crypto.hash.length).toString('base64');
-      this.passwordHash = crypto.pbkdf2Sync(password, this.salt, config.crypto.hash.iterations, config.crypto.hash.length, 'sha1');
-    } else {
-      // remove password (unable to login w/ password any more, but can use providers)
-      this.salt = undefined;
-      this.passwordHash = undefined;
-    }
-  })
-  .get(function () {
-    return this._plainPassword;
+userSchema.pre('save', function(next) {
+  // Если пароль небыл изменен - делаем next();
+  if(!this.isModified('passwordHash')){
+    return next();
+  }
+  let psd = this.passwordHash;
+  let saltRounds = 10;  // количество символов в новой соли
+  bcrypt.genSalt(saltRounds, function(err, salt) { // генерируем соль
+    if (err) next(err);
+    let generatedSalt = salt; // Если все хорошо - создаем hash на основе пароля и соли
+    bcrypt.hash(psd, generatedSalt, function(err, hash) {
+      if (err) next(err);
+      this.passwordHash = hash; // Теперь пароль зашифован!
+      this.salt = generatedSalt;
+      next();
+    });
   });
+});
 
-userSchema.methods.checkPassword = function (password) {
+userSchema.methods.comparePassword = (password)=>{
   if (!password) return false; // empty password means no login by password
   if (!this.passwordHash) return false; // this user does not have password (the line below would hang!)
+  if (!this.salt) return false; // this user does not have password (the line below would hang!)
 
-  return crypto.pbkdf2Sync(
-    password,
-    this.salt,
-    config.crypto.hash.iterations,
-    config.crypto.hash.length,
-    'sha1')
-    == this.passwordHash;
+  var result = bcrypt.compareSync(password, this.passwordHash);
+  return result
 };
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('UserAdmin', userSchema);
