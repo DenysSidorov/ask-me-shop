@@ -6,12 +6,15 @@
   "author": "Denis Sidorov",
   "license": "ISC",
   "dependencies": {
+    "config": "^1.30.0",
+    "crypto": "^1.0.1",
     "ejs": "^2.5.8",
     "koa": "^2.5.0",
     "koa-compose": "^4.0.0",
     "koa-socket": "^4.4.0",
     "koa-static": "^4.0.2",
     "koa-views": "^6.1.4",
+    "mongoose": "^5.0.14",
     "socket.io": "^2.1.0"
   },
   "devDependencies": {

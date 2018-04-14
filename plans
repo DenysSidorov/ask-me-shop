@@ -5,6 +5,7 @@
 - ***** add nodemon
 - ***** add all middleware
 
+- add admin page
 - add mongoose
 - add session
 - add passport
@@ -16,3 +17,6 @@
 - ***** Socket.io
 - Mongoose in depth
 
+1. Выдача токена
+2. Если имеем токен - делаеи handshake
+3. Если все ок - продолжаем работу с сокетами
