@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 import bcrypt from 'bcrypt';
+import config from '../config';
 
 const userSchema = new mongoose.Schema({
-  displayName: {
+  name: {
     type: String,
     required: "Имя пользователя отсутствует."
   },
@@ -29,17 +30,17 @@ const userSchema = new mongoose.Schema({
   }
 }, {timestamps: true});
 
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
   // Если пароль небыл изменен - делаем next();
-  if(!this.isModified('passwordHash')){
+  if (!this.isModified('passwordHash')) {
     return next();
   }
   let psd = this.passwordHash;
-  let saltRounds = 10;  // количество символов в новой соли
-  bcrypt.genSalt(saltRounds, function(err, salt) { // генерируем соль
+  let saltRounds = config.crypto.saltLength;  // количество символов в новой соли
+  bcrypt.genSalt(saltRounds, function (err, salt) { // генерируем соль
     if (err) next(err);
     let generatedSalt = salt; // Если все хорошо - создаем hash на основе пароля и соли
-    bcrypt.hash(psd, generatedSalt, function(err, hash) {
+    bcrypt.hash(psd, generatedSalt, function (err, hash) {
       if (err) next(err);
       this.passwordHash = hash; // Теперь пароль зашифован!
       this.salt = generatedSalt;
@@ -48,7 +49,7 @@ userSchema.pre('save', function(next) {
   });
 });
 
-userSchema.methods.comparePassword = (password)=>{
+userSchema.methods.comparePassword = (password) => {
   if (!password) return false; // empty password means no login by password
   if (!this.passwordHash) return false; // this user does not have password (the line below would hang!)
   if (!this.salt) return false; // this user does not have password (the line below would hang!)
