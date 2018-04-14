@@ -1,6 +1,5 @@
 import Koa from 'koa';
 const http = require('http');
-const app = new Koa();
 const https = require('https');
 const views = require('koa-views');
 const serve = require('koa-static');
@@ -11,7 +10,13 @@ import config from './config';
 import middlewares from './server/middlewares';
 import socket from './server/socket';
 
+// Switch on before main app for ensure that we have connection in app
+import  mongoose from './server/connection/index';
+const app = new Koa();
 middlewares(app);
+
+const mainRouter = require('./server/routes/index');
+app.use(mainRouter.routes());
 
 
 app.use(async function (ctx) {
