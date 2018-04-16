@@ -18,7 +18,7 @@ middlewares(app);
 const mainRouter = require('./server/routes/index');
 app.use(mainRouter.routes());
 
-
+// need rewrite it
 app.use(async function (ctx) {
   if (ctx.path !== '/') {
      ctx.redirect('/');
