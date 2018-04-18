@@ -2,6 +2,7 @@ import compose from 'koa-compose';
 
 import testTime from './00-testTime';
 import staticFiles from './002-staticFiles';
+import logger from './03-logger';
 import bodyParser from './07-bodyParser';
 import ultipartData from './08-multipartParser';
 
@@ -14,6 +15,7 @@ export default (app)=>{
   const all = compose([
     testTime,
     staticFiles,
+    logger,
     bodyParser,
     ultipartData,
     views,

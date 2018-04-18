@@ -9,7 +9,7 @@ let socketIO = require('socket.io');
 import config from './config';
 import middlewares from './server/middlewares';
 import socket from './server/socket';
-
+process.env.SUPPRESS_NO_CONFIG_WARNING = true;
 // Switch on before main app for ensure that we have connection in app
 import  mongoose from './server/connection/index';
 const app = new Koa();
