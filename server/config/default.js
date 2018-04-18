@@ -4,21 +4,21 @@ const defer = require('config/defer').deferConfig;
 module.exports = {
   // secret data can be moved to env variables
   // or a separate config
-  secret:   'mysecret',
+  secret: 'mysecret',
   mongoose: {
-    uri:     'mongodb://localhost/app',
+    uri: 'mongodb://localhost/app',
     options: {
       server: {
         socketOptions: {
           keepAlive: 1
         },
-        poolSize:      5
+        poolSize: 5
       }
     }
   },
   crypto: {
     hash: {
-      length:     128,
+      length: 128,
       iterations: process.env.NODE_ENV == 'production' ? 1200 : 1
     }
   },

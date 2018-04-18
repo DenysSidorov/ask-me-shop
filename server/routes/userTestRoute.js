@@ -1,14 +1,18 @@
 // can be split into files too
+import UserAdmin from '../models/user';
+
 const Router = require('koa-router');
 
 
 const router = new Router();
 
-router.get('/views', async function(ctx, next) {
+router.post('/views', async function (ctx, next) {
   // let count = ctx.session.count || 0;
   // ctx.session.count = ++count;
-
-  ctx.body = 'Ok';
+  // let result = await UserAdmin.create({
+  //   email: '1000scorpions000@gmail.com', name: '1lolkin'
+  // });
+  ctx.body = 5;
   // ctx.body = ctx.render('./templates/index.pug', {
   //   user: 'John',
   //   count
@@ -30,15 +34,15 @@ router.get('/user/:user/hello',
 
     ctx.throw(403);
   },
-  async function(ctx) {
+  async function (ctx) {
     ctx.body = "Hello, " + ctx.params.user;
   }
 );
 
-router.get('/', async function(ctx) {
+router.get('/', async function (ctx) {
   // ctx.redirect('/views');
 
   ctx.body = '1';
 });
 
-module.exports  = router;
+module.exports = router;

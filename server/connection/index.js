@@ -5,5 +5,5 @@ mongoose.Promise = Promise;
 // mongoose.set('debug', true);
 
 mongoose.connect(config.mongoConnect.path, config.mongoConnect.config);
-
-export default mongoose;
+module.exports = mongoose;
+// export default mongoose;
