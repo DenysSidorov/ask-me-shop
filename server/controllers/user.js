@@ -34,7 +34,7 @@ var ObjectId = mongoose.Types.ObjectId;
 
 
 module.exports.createUser = async (ctx, next) => {
-  // console.log(ctx.request.body);
+  console.log(ctx.request.body);
   let email = ctx.request.body.email;
   let displayName = ctx.request.body.displayName;
   let password = ctx.request.body.password;
