@@ -14,7 +14,7 @@ process.env.SUPPRESS_NO_CONFIG_WARNING = true;
 // Switch on before main app for ensure that we have connection in app
 import  mongoose from './server/connection/index';
 const app = new Koa();
-session(app);
+session(app, mongoose);
 middlewares(app);
 
 const mainRouter = require('./server/routes/index');
