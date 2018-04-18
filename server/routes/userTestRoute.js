@@ -3,14 +3,16 @@ const Router = require('koa-router');
 
 
 const router = new Router();
-router.get('/views', async function(ctx, next) {
-  let count = ctx.session.count || 0;
-  ctx.session.count = ++count;
 
-  ctx.body = ctx.render('./templates/index.pug', {
-    user: 'John',
-    count
-  });
+router.get('/views', async function(ctx, next) {
+  // let count = ctx.session.count || 0;
+  // ctx.session.count = ++count;
+
+  ctx.body = 'Ok';
+  // ctx.body = ctx.render('./templates/index.pug', {
+  //   user: 'John',
+  //   count
+  // });
 });
 
 
