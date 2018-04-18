@@ -1,3 +1,4 @@
+
 const session = require('koa-generic-session');
 const mongooseStore = require('koa-session-mongoose');
 const convert = require('koa-convert');
@@ -16,7 +17,7 @@ export default convert(session({
   // koa-session-mongoose resaves the session as a whole, not just a single field
   rolling: true,
 
-  store: mongooseStore.create({
+  store: new mongooseStore({
     model:   'Session',
     expires: 3600 * 4
   })

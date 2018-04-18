@@ -9,7 +9,7 @@ import multipartData from './08-multipartParser';
 
 import views from './001-views';
 import errors from './05-errors';
-import mongooseSession from './06-mongooseSession'
+import mongooseSession from './temp/06-mongooseSession'
 
 export default (app)=>{
   const all = compose([
@@ -18,7 +18,7 @@ export default (app)=>{
     views,
     logger,
     errors,
-    mongooseSession,
+    // mongooseSession,
     bodyParser,
     multipartData,
   ]);
