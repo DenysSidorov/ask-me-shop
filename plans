@@ -1,13 +1,13 @@
 - add smart logging
-- add smart config-npm
+- ***** add smart config-npm
 - add https
 - add pm2
 - ***** add nodemon
 - ***** add all middleware
 
 - add admin page
-- add mongoose
-- add session
+- ***** add mongoose
+- ***** add session
 - add passport
 - add auth with token/local strategy
 - add put session in socket
