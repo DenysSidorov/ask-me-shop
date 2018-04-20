@@ -50,7 +50,10 @@ userSchema.virtual('password')
       if (password.length < 4) {
         this.invalidate('password', 'Пароль должен быть минимум 4 символа.');
       }
+    } else {
+
     }
+
 
     this._plainPassword = password;
 
