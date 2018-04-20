@@ -1,12 +1,9 @@
 import Koa from 'koa';
 const http = require('http');
 const https = require('https');
-const views = require('koa-views');
-const serve = require('koa-static');
-const path = require('path');
-let socketIO = require('socket.io');
 
 import config from './config';
+const mainRouter = require('./server/routes/index');
 import middlewares from './server/middlewares';
 import session from './server/middlewares/session';
 import socket from './server/socket';
@@ -16,8 +13,6 @@ import  mongoose from './server/connection/index';
 const app = new Koa();
 session(app, mongoose);
 middlewares(app);
-
-const mainRouter = require('./server/routes/index');
 app.use(mainRouter.routes());
 
 app.use(async function (ctx) {
