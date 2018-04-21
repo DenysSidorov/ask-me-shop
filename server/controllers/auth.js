@@ -53,3 +53,15 @@ module.exports.logOut = async (ctx, next) => {
   ctx.redirect('/');
   ctx.body = 'Beginning! logOut'
 }
+
+module.exports.checkToken = async (ctx, next) => {
+  // await passport.authenticate('jwt', function (err, user) {
+  //   if (user) {
+  //     ctx.body = "hello " + user.displayName;
+  //   } else {
+  //     ctx.body = "No such user";
+  //     console.log("err", err)
+  //   }
+  // } )(ctx, next)
+  ctx.status = 501;
+}
