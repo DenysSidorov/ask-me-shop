@@ -1,5 +1,4 @@
 let passport = require('koa-passport');
-let passport = require('koa-passport');
 
 import localStrategy from './localStrategy';
 import JWTStrategy from './JWTStrategy';
