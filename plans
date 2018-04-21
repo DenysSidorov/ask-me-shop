@@ -8,8 +8,8 @@
 - add admin page
 - ***** add mongoose
 - ***** add session
-- add passport
-- add auth with token/local strategy
+- ***** add passport
+- ***** add auth with token/local strategy
 - add put session in socket
 - write app
 
@@ -17,7 +17,7 @@
 - ***** Socket.io
 - Mongoose in depth
 
-1. Выдача токена
+1. ***** Выдача токена
 2. Если имеем токен - делаеи handshake
 3. Если все ок - продолжаем работу с сокетами
 

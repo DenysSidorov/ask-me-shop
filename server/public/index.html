@@ -3,38 +3,92 @@
 <head>
     <title>Socket.IO chat</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font: 13px Helvetica, Arial; }
-        form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-        form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-        form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-        #messages { list-style-type: none; margin: 0; padding: 0; height: 200px; overflow-y: auto; }
-        #messages li { padding: 5px 10px; }
-        #messages li:nth-child(odd) { background: #eee; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font: 13px Helvetica, Arial;
+        }
+
+        form {
+            background: #000;
+            padding: 3px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        form input {
+            border: 0;
+            padding: 10px;
+            width: 90%;
+            margin-right: .5%;
+        }
+
+        form button {
+            width: 9%;
+            background: rgb(130, 224, 255);
+            border: none;
+            padding: 10px;
+        }
+
+        #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            height: 200px;
+            overflow-y: auto;
+        }
+
+        #messages li {
+            padding: 5px 10px;
+        }
+
+        #messages li:nth-child(odd) {
+            background: #eee;
+        }
     </style>
 </head>
 <body>
 <ul id="messages"></ul>
 <form action="" name="from">
-    <input id="m" autocomplete="off" /><button id="send">Send</button>
+    <input id="m" autocomplete="off"/>
+    <button id="send">Send</button>
 </form>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
 <script>
-  var socket = io();
-//  console.log(socket, 's');
-//  socket.emit('chat message', '');
+  var socket = io('http://localhost:3003');
+  //  console.log(socket, 's');
+  //  socket.emit('chat message', '');
   var ul = document.getElementById('messages');
   socket.on('connect', function (par) {
 //    $('#incomingChatMessages').append($('<li>Connected</li>'));
+    socket.emit('authenticate', {token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhZGI1ZmZlNDc2ZDllMjU3MDA4YjE5OCIsImRpc3BsYXlOYW1lIjoiRGVkIiwiZW1haWwiOiJkZWRAZ21haWwuY29tIiwiaWF0IjoxNTI0MzQ5NjM5LCJleHAiOjE1MjQ2MDg4Mzl9.ioIASBJrNO_Ime7r90_I7i_G1TOZP2jNjXXWIqei3yg'}) //send the jwt
+    socket.on('authenticated', function () {
+      console.log('authenticated');
+      //do other things
+      })
+    socket.on('unauthorized', function(msg) {
+        console.log("unauthorized: " + JSON.stringify(msg.data));
+        throw new Error(msg.data.type);
+      })
+    socket.on('unauthorized2', function(msg) {
+      console.log(msg);
+    })
 
 
-    socket.on('message', function(message) {
+
+
+    socket.on('message', function (message) {
       var li = document.createElement('li');
       li.textContent = message;
       ul.append(li);
     });
-    socket.on('disconnect', function() {
+    socket.on('disconnect', function () {
       var li = document.createElement('li');
       li.textContent = 'Disconnected';
       li.style.color = 'red';
