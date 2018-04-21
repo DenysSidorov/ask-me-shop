@@ -39,6 +39,7 @@ module.exports.createUser = async (ctx, next) => {
   let displayName = ctx.request.body.displayName;
   let password = ctx.request.body.password;
   if (!displayName || !email || !password) {
+    ctx.throw(400, 'Set please email, password, displayName')
   }
   try {
     await User.create({email, displayName, password});
