@@ -1,9 +1,14 @@
-const passport = require('koa-passport');
-const User = require('../../models/user');
+let passport = require('koa-passport');
+import localStrategy from './localStrategy';
 
-require('./serialize');
+passport = localStrategy(passport);
+//const User = require('../models/user');
 
-require('./localStrategy');
-require('./JWTStrategy');
+//require('./serialize');
 
-module.exports = passport;
+//require('./localStrategy');
+//require('./JWTStrategy');
+
+
+
+module.exports =  passport;
