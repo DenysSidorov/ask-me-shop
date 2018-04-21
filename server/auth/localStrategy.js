@@ -6,7 +6,7 @@ let User = require('../models/user');
 export default (passport) => {
   passport.use(new LocalStrategy({
       usernameField: 'email', // 'username' by default
-      passwordField: 'passwor1d',
+      passwordField: 'password',
       passReqToCallback: true, // all strategies support ctx: req for more complex cases
       session: true
     },
