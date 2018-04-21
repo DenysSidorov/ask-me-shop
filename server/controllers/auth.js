@@ -1,7 +1,9 @@
-const User = require('../models/user');
-const mongoose = require('../connection/index');
-var ObjectId = mongoose.Types.ObjectId;
+// const User = require('../models/user');
+// const mongoose = require('../connection/index');
+// var ObjectId = mongoose.Types.ObjectId;
+const jwt = require('jsonwebtoken'); // auth via JWT for hhtp
 const passport = require('koa-passport');
+import config from '../config/index.js';
 
 
 module.exports.logIn = async (ctx, next) => {
@@ -22,10 +24,11 @@ module.exports.logIn = async (ctx, next) => {
           displayName: user.displayName,
           email: user.email
         };
-        // const token = jwt.sign(payload, jwtsecret); //здесь создается JWT
+        //здесь создается JWT
+        const token = jwt.sign(payload, config.jwt.secret, { expiresIn: '3d' });
 
-        // ctx.body = {user: user.displayName, token: 'JWT ' + token};
-        ctx.body = payload;
+        ctx.body = {user: user.displayName, token: 'JWT ' + token};
+        // ctx.body = payload;
       }
     }
     /**{

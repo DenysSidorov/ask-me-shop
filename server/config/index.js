@@ -1,10 +1,13 @@
-const config  = {
+const config = {
   crypto: {
     saltLength: 10
   },
-    mongoConnect : {
+  jwt:{
+    secret: 'verysecretword'
+  },
+  mongoConnect: {
     path: 'mongodb://localhost/test',
-    config:{
+    config: {
       poolSize: 5
     },
   }
