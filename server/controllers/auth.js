@@ -25,13 +25,22 @@ module.exports.logIn = async (ctx, next) => {
           email: user.email
         };
         //здесь создается JWT
-        const token = jwt.sign(payload, config.jwt.secret, { expiresIn: '3d' });
-
-        ctx.body = {user: user.displayName, token: 'JWT ' + token};
-        // ctx.body = payload;
+        const token = jwt.sign(payload, config.jwt.secret, {expiresIn: '3d'});
+        let decoded = {};
+        try {
+          decoded = jwt.decode(token);
+          decoded.iat = Date(decoded.iat);
+          decoded.exp =  Date(decoded.exp);
+        } catch (er) {
+          console.log(er);
+        }
+        ctx.body = {
+          token: Object.assign({}, decoded, {data: token})
+          // ctx.body = payload;
+        }
       }
     }
-    /**{
+      /**{
         successRedirect: '/',
         failureRedirect: '/',
         failureFlash: true // req.flash, better
@@ -43,6 +52,7 @@ module.exports.logIn = async (ctx, next) => {
         //   - это поместит user.id в session.passport.user (если не стоит опция session:false)
         //   - также присвоит его в req.user
     }*/
+
   )(ctx, next);
 
 }
@@ -67,6 +77,6 @@ module.exports.checkToken = async (ctx, next) => {
       ctx.body = "No such user";
       console.log("err", err)
     }
-  } )(ctx, next)
+  })(ctx, next)
   // ctx.status = 501;
 }
