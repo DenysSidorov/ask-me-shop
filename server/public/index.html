@@ -39,7 +39,7 @@
             list-style-type: none;
             margin: 0;
             padding: 0;
-            height: 200px;
+            height: calc(100vh - 40px);
             overflow-y: auto;
         }
 
@@ -87,9 +87,13 @@
   sendBtn.addEventListener('click', function (ev) {
     ev.preventDefault();
     var sendValue = document.forms.from.m.value;
-    console.log(sendValue, ' v');
+    var messages = document.getElementById('messages');
+    // console.log(sendValue, ' v');
     socket.emit('message', sendValue);
     document.forms.from.m.value = '';
+    setTimeout(()=>{
+    messages.scrollTop = 10000000
+    },50);
   })
 </script>
 
