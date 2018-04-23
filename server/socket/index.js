@@ -1,36 +1,11 @@
 let socketIO = require('socket.io');
-// let socketEmitter = require('socket.io-emitter');
-
-const socketioJwt = require('socketio-jwt'); // auth via JWT for socket.io
-import config from '../config/index';
+import ioAuth from './auth';
 
 function socket(server){
 
   let io = socketIO(server);
+  io.use(ioAuth);
 
-  io.use(function(socket, next) {
-    var handshakeData = socket.request;
-
-
-
-    // var cookies = cookie.parse(socket.handshake.headers.cookie);
-
-    function getCookie(name) {
-      var cookie = socket.handshake.headers.cookie;
-      var matches = cookie.match(new RegExp(
-        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-      ));
-      return matches ? decodeURIComponent(matches[1]) : undefined;
-    }
-    var cookieToken = getCookie('t');
-    console.log(cookieToken);
-
-
-    // console.log(handshakeData.cookies);
-    // console.log(socket.cookies);
-    // console.log(handshakeData.headers, '++++++++++');
-    next();
-  });
   io.on('connection',
     function (client) {
     console.log(client.id + ' user connected');
