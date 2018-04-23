@@ -64,24 +64,10 @@
   var socket = io('http://localhost:3003');
   //  console.log(socket, 's');
   //  socket.emit('chat message', '');
+  document.cookie = "t=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhZGI1ZmZlNDc2ZDllMjU3MDA4YjE5OCIsImRpc3BsYXlOYW1lIjoiRGVkIiwiZW1haWwiOiJkZWRAZ21haWwuY29tIiwiaWF0IjoxNTI0MzQ5NjM5LCJleHAiOjE1MjQ2MDg4Mzl9.ioIASBJrNO_Ime7r90_I7i_G1TOZP2jNjXXWIqei3yg";
   var ul = document.getElementById('messages');
   socket.on('connect', function (par) {
 //    $('#incomingChatMessages').append($('<li>Connected</li>'));
-    socket.emit('authenticate', {token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhZGI1ZmZlNDc2ZDllMjU3MDA4YjE5OCIsImRpc3BsYXlOYW1lIjoiRGVkIiwiZW1haWwiOiJkZWRAZ21haWwuY29tIiwiaWF0IjoxNTI0MzQ5NjM5LCJleHAiOjE1MjQ2MDg4Mzl9.ioIASBJrNO_Ime7r90_I7i_G1TOZP2jNjXXWIqei3yg'}) //send the jwt
-    socket.on('authenticated', function () {
-      console.log('authenticated');
-      //do other things
-      })
-    socket.on('unauthorized', function(msg) {
-        console.log("unauthorized: " + JSON.stringify(msg.data));
-        throw new Error(msg.data.type);
-      })
-    socket.on('unauthorized2', function(msg) {
-      console.log(msg);
-    })
-
-
-
 
     socket.on('message', function (message) {
       var li = document.createElement('li');
