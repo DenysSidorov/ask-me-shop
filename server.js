@@ -2,7 +2,7 @@ import Koa from 'koa';
 const http = require('http');
 const https = require('https');
 
-import config from './config';
+import config from './server/config/index';
 const mainRouter = require('./server/routes/index');
 import middlewares from './server/middlewares';
 import session from './server/middlewares/session';

@@ -16,6 +16,7 @@ function socket(server){
       io.emit('message', msg);
     });
     client.on('disconnect', function(){
+
       console.log(client.id + ' user disconnect');
       client.broadcast.emit('message', '-- Wow, Disconnect user =(');
     });
