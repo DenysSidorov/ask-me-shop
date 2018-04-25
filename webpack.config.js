@@ -37,7 +37,7 @@ var config = {
   devServer: {
     hot: true,
     host: "localhost",
-    port: 8080,
+    port: 8088,
     contentBase: path.join(__dirname, 'www'),
     // proxy: [{
     //     path: '*',
