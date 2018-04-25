@@ -3,6 +3,9 @@ const config = {
     httpPort: 3003,
     httpsPort: 3004
   },
+  // front:{
+  //   localPort: 3005
+  // },
   crypto: {
     saltLength: 10
   },

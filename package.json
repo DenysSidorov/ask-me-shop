@@ -1,11 +1,13 @@
 {
   "name": "ask-me-shop",
   "version": "1.0.0",
-  "description": "online chat for shop basedon js stack",
+  "description": "online chat for shop based on js stack",
   "main": "server.js",
   "author": "Denis Sidorov",
   "license": "ISC",
   "dependencies": {
+    "vue": "*",
+    "vue-router": "*",
     "bcrypt": "^1.0.3",
     "co-busboy": "^1.4.0",
     "config": "^1.30.0",
@@ -34,9 +36,32 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1"
+    "babel-preset-env": "^1.6.1",
+    "babel-core": "^6.1.2",
+    "babel-loader": "^6.1.0",
+    "babel-plugin-transform-runtime": "^6.1.2",
+    "babel-preset-es2015": "^6.1.2",
+    "babel-preset-stage-0": "^6.1.2",
+    "babel-runtime": "^5.8.0",
+    "buble": "*",
+    "buble-loader": "*",
+    "css-loader": "^0.23.0",
+    "file-loader": "^0.8.4",
+    "html-webpack-plugin": "*",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.13.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
+    "vue-hot-reload-api": "^1.2.0",
+    "vue-html-loader": "^1.0.0",
+    "vue-loader": "^7.3.0",
+    "vue-template-compiler": "*",
+    "webpack": "^3.11.0"
   },
   "scripts": {
-    "start": "nodemon --exec babel-node server.js"
+    "start-dev-front": "webpack-dev-server --inline --hot",
+    "start-dev-server": "nodemon --exec babel-node server.js",
+    "build-front": "webpack --config webpack.config.js src/app.js www/bundle.js"
   }
 }
