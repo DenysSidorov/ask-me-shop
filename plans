@@ -10,7 +10,7 @@
 - ***** add session
 - ***** add passport
 - ***** add auth with token/local strategy
-- add put session in socket
+- ***** add put session in socket
 - write app
 
 ** DOCUMENTATIONS**
