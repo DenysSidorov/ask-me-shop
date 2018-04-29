@@ -6,6 +6,6 @@ new Vue({
     // components: {hello: hello},
     render: h => h(hello),
     // data: {
-    //     message: "Hello Vue"
+    //     message: "Hello Vue!"
     // }
 })
