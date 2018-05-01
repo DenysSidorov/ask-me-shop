@@ -2,6 +2,7 @@
 - ***** add smart config-npm
 - add https
 - add pm2
+- nginx
 - ***** add nodemon
 - ***** add all middleware
 
